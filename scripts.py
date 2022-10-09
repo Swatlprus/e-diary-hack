@@ -14,10 +14,7 @@ def fix_marks(fio):
         print('Количество найденных записей больше 1')
     except ObjectDoesNotExist:
         print('Ученика с таким ФИО нет в базе')
-    bad_marks=Mark.objects.filter(schoolkid__full_name__contains=child.full_name, points__in=[2,3])
-    for mark in bad_marks:
-        mark.points=5
-        mark.save()
+    Mark.objects.filter(schoolkid__full_name__contains=child.full_name, points__in=[2,3]).update(points=5)
 
 
 def remove_chastisements(fio):
